@@ -50,6 +50,23 @@ function hasClass(selector, cssClass) {
   return getElement(selector).classList.contains(cssClass);
 }
 
+function showAlert(message) {
+  showMessageModal('alert', message);
+}
+
+function showWarning(message) {
+  showMessageModal('warning', message);
+}
+
+function showInfo(message) {
+  showMessageModal('info', message);
+}
+
+function showMessageModal(modalType, message) {
+  setInnerHTML(`#${modalType}-message-text`, message);
+  show(`${modalType}-modal`);
+}
+
 async function getRequest(url, parameters = {}, loading = true) {
   try {
       if (loading) {
