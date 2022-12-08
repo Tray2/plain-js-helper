@@ -86,7 +86,11 @@ async function getRequest(url, parameters = {}, loading = true) {
   } catch (error) {
       return error;
   }
-} 
+}
+
+function setFocusTo(selector) {
+  getElement(selector).focus();
+}
 
 async function postRequest(url, parameters = {}, loading = true) {
   try {
