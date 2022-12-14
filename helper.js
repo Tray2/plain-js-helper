@@ -1,25 +1,37 @@
 function getElement(selector) {
-  return document.querySelector(selector);
+  let el = document.querySelector(selector);
+  if (el === null) throw `No matching element found: ${selector}`;
+  return el;
 }
 
 function getAllElements(selector) {
-  return document.querySelectorAll(selector);
+  let els = document.querySelectorAll(selector);
+  if (els.length === 0) throw `No matching elements found: ${selector}`;
+  return els;
 }
 
 function getValue(selector) {
-  return getElement(selector).value;
+  let value = getElement(selector).value;
+  if (value === undefined) throw `This element doesn't have a value property: ${selector}`;
+  return value;
 }
 
 function setValue(selector, value) {
-  getElement(selector).value = value;
+  let el = getElement(selector)
+  if (el.value === undefined) throw `This element doesn't have a value property: ${selector}`;
+  el.value = value;
 }
 
 function getInnerHTML(selector) {
-  return getElement(selector).InnerHTML;
+  let el = getElement(selector);
+  if (el.nodeName === 'INPUT') throw `This element doesn't have an innerHTML propery: ${selector}`;
+  return el.innerHTML;
 }
 
 function setInnerHTML(selector, html) {
-  getElement(selector).InnerHTML = html;
+  let el = getElement(selector)
+  if (el.nodeName === 'INPUT') throw `This element doesn't have an innerHTML propery: ${selector}`;
+  el.innerHTML = html;
 }
 
 function show(selector) {
@@ -43,7 +55,7 @@ function isHidden(selector) {
 }
 
 function isVisible(selector) {
-  return ! getElement(selector).classList.contains('is-hidden');
+  return ! isHidden(selector);
 }
 
 function hasClass(selector, cssClass) {
