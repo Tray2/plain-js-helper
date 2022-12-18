@@ -34,6 +34,18 @@ function setInnerHTML(selector, html) {
   el.innerHTML = html;
 }
 
+function getImgSrc(selector) {
+  let el = getElement(selector);
+  if(el.nodeName !== 'IMG') throw `This element doesn't have a source attribute: ${selector}`
+  return el.src;
+}
+
+function setImgSrc(selector, path) {
+  let el = getElement(selector);
+  if(el.nodeName !== 'IMG') throw `This element doesn't have a source attribute: ${selector}`
+  el.src = path;
+}
+
 function show(selector) {
   getElement(selector).classList.remove('is-hidden');
 }

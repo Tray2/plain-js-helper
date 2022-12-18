@@ -7,13 +7,67 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="k"></div>
-
-    <input type="text" id="my-input">
+    <input type="text" id="isbn">
+    <button onclick="findBook()">Search</button>
+    <hr>
+    <img id="cover" src="" alt="Cover Of book">
+    <form action="">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" placeholder="Title">
+        <label for="published_year">Published Year</label>
+        <input type="text" name="published_year" id="published_year" placeholder="YYYY">
+        <label for="author">Author</label>
+        <input type="text" name="author[]" id="author" placeholder="Author">
+        <label for="format">Format</label>
+        <input type="text" name="format" id="format" placeholder="Format">
+        <label for="genre">genre</label>
+        <input type="text" name="genre" id="genre" placeholder="Genre">
+        <label for="blurb">Blurb</label>
+        <textarea name="blurb" id="blurb" cols="30" rows="10"></textarea>
+        <input type="submit" value="Save">
+    </form>
 
     <script src="helper.js"></script>
     <script>
-        setFocusTo('#my-input');
+            const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=isbn:`;
+
+        async function findBook() {
+            parseResponse(await getRequest(`${baseUrl}${getValue('#isbn')}`, {}, false));
+        }
+
+        function parseResponse(response) {
+            let book = extractBook(response);
+            setCoverImage(book);
+            setAuthor(book);
+
+            //setValue('#author', book.authors[0]);
+            setValue('#title', book.title);
+            setValue('#published_year', book.publishedDate);
+            setValue('#blurb', book.description);
+            setValue('#genre', book.categories[0]);
+        }
+
+        function extractBook(response, isbn) {
+            return response.items[0].volumeInfo;
+        }
+
+        function setCoverImage(book) {
+            setImgSrc('#cover',book.imageLinks.thumbnail);
+        }
+
+        function setAuthor(book) {
+            book.authors.forEach((element, index) => {
+                if (index == 0) {
+                    setValue('#author', element);
+                }
+            });
+        }
+
+        function init() {
+            setValue('#isbn', 9780441019458);
+        }
+
+        init();
     </script>
 </body>
 </html>
