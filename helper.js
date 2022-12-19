@@ -120,17 +120,17 @@ function newElement(elementType) {
   return document.createElement(elementType);
 }
 
-function addInputFieldAfter(selector, name, value) {
+function addInputFieldAfter(selector, type, name, value) {
   let input = newElement('input');
-  input.type = 'text';
+  input.type = type;
   input.name = name;
   input.value = value;
   getElement(selector).after(input);
 }
 
-function addInputFieldBefore(selector, name, value) {
+function addInputFieldBefore(selector, type, name, value) {
   let input = newElement('input');
-  input.type = 'text';
+  input.type = type;
   input.name = name;
   input.value = value;
   getElement(selector).before(input);
