@@ -116,6 +116,26 @@ function setFocusTo(selector) {
   getElement(selector).focus();
 }
 
+function newElement(elementType) {
+  return document.createElement(elementType);
+}
+
+function addInputFieldAfter(selector, name, value) {
+  let input = newElement('input');
+  input.type = 'text';
+  input.name = name;
+  input.value = value;
+  getElement(selector).after(input);
+}
+
+function addInputFieldBefore(selector, name, value) {
+  let input = newElement('input');
+  input.type = 'text';
+  input.name = name;
+  input.value = value;
+  getElement(selector).before(input);
+}
+
 async function postRequest(url, parameters = {}, loading = true) {
   try {
       if (loading) {
