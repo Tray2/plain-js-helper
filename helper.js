@@ -120,20 +120,44 @@ function newElement(elementType) {
   return document.createElement(elementType);
 }
 
-function addInputFieldAfter(selector, type, name, value) {
+function createInput(attributes) {
   let input = newElement('input');
-  input.type = type;
-  input.name = name;
-  input.value = value;
-  getElement(selector).after(input);
+  if (attributes.name === undefined) throw 'Name attribute is mandatory';
+  if (attributes.type === undefined) throw 'Type attribute is mandatory';
+  Object.keys(attributes).forEach(attribute => {
+    if (attribute === 'required') {
+      input.required = true;
+    } else if (attribute === 'readonly') {
+      input.readOnly = true;
+    } else if (attribute === 'disabled') {
+      input.disabled = true;
+    } else {
+      input[attribute] = attributes[attribute];
+    }
+  });
+  return input;
 }
 
-function addInputFieldBefore(selector, type, name, value) {
-  let input = newElement('input');
-  input.type = type;
-  input.name = name;
-  input.value = value;
-  getElement(selector).before(input);
+function addInputFieldAfter(selector, attributes) {
+  let element = createInput(attributes);
+  getElement(selector).after(element);
+}
+
+function addInputFieldBefore(selector, attributes) {
+  let element = createInput(attributes);
+  getElement(selector).after(element);
+}
+
+
+function cloneInput(selector) {
+  let element = getElement(selector);
+  if (element.nodeName !== 'INPUT') throw `Element is not an input: ${selector}`;
+  let clone = element.cloneNode();
+  if (element.id !== undefined) {
+    clone.id = element.id + Date.now();
+  }
+  clone.value = '';
+  element.after(clone);
 }
 
 async function postRequest(url, parameters = {}, loading = true) {
