@@ -91,27 +91,6 @@ function showMessageModal(modalType, message) {
   show(`${modalType}-modal`);
 }
 
-async function getRequest(url, parameters = {}, loading = true) {
-  try {
-      if (loading) {
-          showLoading();
-      }
-      let responsePromise = await fetch(url, { method: 'GET', headers: parameters});
-      if(! responsePromise.ok) {
-          if(loading) {
-              hideLoading();
-          }
-          throw new Error(responsePromise.status );
-      }
-      if (loading) {
-          hideLoading();
-      }
-      return await responsePromise.json();
-  } catch (error) {
-      return error;
-  }
-}
-
 function setFocusTo(selector) {
   getElement(selector).focus();
 }
@@ -145,7 +124,7 @@ function addInputFieldAfter(selector, attributes) {
 
 function addInputFieldBefore(selector, attributes) {
   let element = createInput(attributes);
-  getElement(selector).after(element);
+  getElement(selector).before(element);
 }
 
 
@@ -157,6 +136,15 @@ function cloneInput(selector) {
     clone.id = element.id + Date.now();
   }
   clone.value = '';
+  element.after(clone);
+}
+
+function cloneElement(selector) {
+  let element = getElement(selector);
+  let clone = element.cloneNode();
+  if (element.id !== undefined) {
+    clone.id = element.id + Date.now();
+  }
   element.after(clone);
 }
 
@@ -174,6 +162,27 @@ async function postRequest(url, parameters = {}, loading = true) {
       });
       if(! responsePromise.ok) {
           if (loading) {
+              hideLoading();
+          }
+          throw new Error(responsePromise.status );
+      }
+      if (loading) {
+          hideLoading();
+      }
+      return await responsePromise.json();
+  } catch (error) {
+      return error;
+  }
+}
+
+async function getRequest(url, parameters = {}, loading = true) {
+  try {
+      if (loading) {
+          showLoading();
+      }
+      let responsePromise = await fetch(url, { method: 'GET', headers: parameters});
+      if(! responsePromise.ok) {
+          if(loading) {
               hideLoading();
           }
           throw new Error(responsePromise.status );
