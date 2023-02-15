@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .is-hidden {
+            display: none;
+        }
+
+        .modal {
+            background-color: rgba(0,0,0, 0.3);
+            position: fixed;
+            z-index: 5;
+            left: 0;
+            top: 0;
+            min-width: 100%;
+            min-height: 100%;
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: lightpink;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 5px;
+        }
+
+        body {
+            padding: 10px;
+            background-color: azure;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Alert modal example</h1>
+    <button onclick="showAlert('This is an alert!')">Show Alert</button>
+    <section id="alert-modal" class="is-hidden modal">
+        <div class="modal-content">
+            <p id="alert-message-text"></p>
+            <button onclick="hide('#alert-modal')">Close</button>
+        </div>
+    </section>
+    <script src="helper.js"></script>
+</body>
+</html>
