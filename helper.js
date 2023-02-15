@@ -88,7 +88,7 @@ function showInfo(message) {
 
 function showMessageModal(modalType, message) {
   setInnerHTML(`#${modalType}-message-text`, message);
-  show(`${modalType}-modal`);
+  show(`#${modalType}-modal`);
 }
 
 function setFocusTo(selector) {
