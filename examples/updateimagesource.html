@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 10px;
+            background-color: azure;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Update Image Source</h1>
+    <ul>
+        <li>Example image one, by  <a href="https://unsplash.com/@pandales">Frank Ching</a></li>
+        <li>Example image two, by <a href="https://unsplash.com/@samusevych">Sasha Samusevych</a></li>
+    </ul>
+
+    <button onclick="updateImageSource()">Update Image</button>
+    <img src="./images/example1.jpg" alt="example image 1">
+    <script src="./../helper.js"></script>
+
+    <script>
+        function updateImageSource() {
+            setImgSrc('img', './images/example2.jpg', 'Changed to example image 2');
+        }
+    </script>
+</body>
+</html>
