@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 10px;
+            background-color: azure;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Form element value</h1>
+    <form action="">
+        <label for="form-field">Form-field:</label>
+        <input type="text" name="form-field" id="form-field">
+    </form>
+    <button onclick="updateFormField()">Update Form-field value</button>
+    <script src="./../helper.js"></script>
+
+    <script>
+        function updateFormField() {
+            setValue('#form-field', 'This is the text');
+        }
+    </script>
+</body>
+</html>
