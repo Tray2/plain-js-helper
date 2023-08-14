@@ -40,10 +40,25 @@ function getImgSrc(selector) {
   return el.src;
 }
 
-function setImgSrc(selector, path) {
+function setImgSrc(selector, path, alt = null) {
   let el = getElement(selector);
   if(el.nodeName !== 'IMG') throw `This element doesn't have a source attribute: ${selector}`
   el.src = path;
+  if (alt !== null) {
+    el.alt = alt;
+  }
+}
+
+function increment(selector, interval = 1) {
+	let el = getElement(selector);
+  if (isNan(el.value)) throw `This element's value isn't a number`
+  el.value = parseInt(el.value) + interval;
+}
+
+function decrement(selector, interval = 1) {
+	let el = getElement(selector);
+  if (isNan(el.value)) throw `This element's value isn't a number`
+  el.value = parseInt(el.value) + interval;
 }
 
 function show(selector) {
